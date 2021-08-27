@@ -53,7 +53,7 @@
 
   {{-- Dynamic Content Start--}}
   <div class="content-wrapper">
-      @yield('content')
+      {{ $slot }}
   </div>
   {{-- Dynamic Content End--}}
 
