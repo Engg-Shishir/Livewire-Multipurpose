@@ -33,18 +33,18 @@
             </a>
           </li>
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+            <a href="#" class="nav-link {{ request()->is('admin/user') ? 'active': '' }}">
               <i class="nav-icon fas fa-copy"></i>
               <p>
-                 Options
+                 Users
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/layout/top-nav.html" class="nav-link">
+                <a href="{{ route('admin.user') }}" class="nav-link {{ request()->is('admin/user') ? 'active': '' }}">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Top Navigation</p>
+                  <p>User List</p>
                 </a>
               </li>
               <li class="nav-item">
