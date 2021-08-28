@@ -29,6 +29,9 @@ class ListUsers extends Component
 
     public function createUser()
     {
+        
+
+
       $data = $this->validate([
         'name' => 'required',
         'email' => 'required|email|unique:users',
@@ -38,7 +41,7 @@ class ListUsers extends Component
       User::create($data);
       $this->dispatchBrowserEvent('closeAddUserModal',['message'=>'User added successfully']);
 
-      session()->flash('message', 'Comment added successfully 😁');
+      /* session()->flash('message', 'Comment added successfully 😁'); */
     }
 
 
@@ -46,10 +49,6 @@ class ListUsers extends Component
 
     public function render()
     {
-/*       return view('livewire.comments', [
-          'comments' => Comment::latest()->paginate(2),
-      ]); */
-
         $users = User::latest()->paginate();
 
         return view('livewire.admin.user.list-users',[

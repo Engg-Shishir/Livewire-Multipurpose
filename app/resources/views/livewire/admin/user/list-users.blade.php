@@ -102,7 +102,7 @@
                         </div>
                     </div><!--card-header -->
                     <div class="card-body">
-                        <div>
+{{--                         <div>
                             @if (session()->has('message'))
                             <div class="alert alert-warning alert-dismissible fade show mb-2" role="alert">
                                 <strong>{{ session('message') }}</strong> 
@@ -111,7 +111,7 @@
                                 </button>
                               </div>
                             @endif
-                        </div>
+                        </div> --}}
                         <table class="table table-hover table-dark">
                             <thead>
                                 <tr>
@@ -204,7 +204,7 @@
   
   window.addEventListener('closeAddUserModal', event =>{
         $('#addUserForm').modal('hide');
-        
+        toastr.success(event.detail.message, 'Success!');
   });
 </script>
 

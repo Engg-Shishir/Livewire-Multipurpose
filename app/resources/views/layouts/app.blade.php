@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="{{ asset('backend/plugins/summernote/summernote-bs4.css') }}">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
- 
+  <link href="{{ asset('backend/plugins/toastr/toastr.min.css') }}" rel="stylesheet"/>
   @livewireStyles
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -108,7 +108,17 @@
 <script src="{{ asset('backend/dist/js/pages/dashboard.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('backend/dist/js/demo.js') }}"></script>
+<script src="{{ asset('backend/plugins/toastr/toastr.min.js') }}"></script>
 
+<script>
+  $(document).readey(function(){
+    toaster.options = {
+      "positionClass": "toast-top-right",
+      "closeButton": true,
+      "progressBar": true,
+    }
+  });
+</script>
 
 @livewireScripts
 </body>
