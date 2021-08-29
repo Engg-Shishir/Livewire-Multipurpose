@@ -11,17 +11,13 @@ use App\Models\User;
 
 class ListUsers extends Component
 {
-
-    public $name;
-    public $email;
-    public $password;
-    public $password_confirmation;
-
-
+    public $showEditModal = false;
     public $state =[];
+    public $user;
 
     public function openAddUserModal()
     {
+      $this->showEditModal = false;
        $this->dispatchBrowserEvent('openAddUserModal');
     }
 
@@ -29,22 +25,53 @@ class ListUsers extends Component
 
     public function createUser()
     {
-        
-
-
-      $data = $this->validate([
+      $validatedData = Validator::make($this->state,[
         'name' => 'required',
         'email' => 'required|email|unique:users',
         'password' => 'required|confirmed'
-      ]);
+      ])->validate();
 
-      User::create($data);
+       $validatedData['password'] = bcrypt( $validatedData['password']);
+
+
+      User::create($validatedData);
       $this->dispatchBrowserEvent('closeAddUserModal',['message'=>'User added successfully']);
 
       /* session()->flash('message', 'Comment added successfully 😁'); */
     }
 
+   public function edit( User $user)
+   {
+     # code...
+     $this->showEditModal = true;
+     $this->user = $user;
+     $this->state = $user->toArray();
+    /*  dd($user->toArray()); */
+     $this->dispatchBrowserEvent('openAddUserModal');
+     
+   }
 
+   public function UpdateUser(){
+
+    $validatedData = Validator::make($this->state,[
+      'name' => 'required',
+      'email' => 'required|email|unique:users,email,'.$this->user->id,
+      'password' => 'sometimes|confirmed'
+    ])->validate();
+       
+    if(!empty($validatedData['password'])){
+      $validatedData['password'] = bcrypt( $validatedData['password']);
+    }
+
+    # This Code also give same result
+
+    /*if(!$validatedData['password']=''){
+      $validatedData['password'] = bcrypt( $validatedData['password']);
+    }*/
+
+      $this->user->update($validatedData);
+      $this->dispatchBrowserEvent('closeAddUserModal',['message'=>'User Updated successfully']);
+   }
 
 
     public function render()

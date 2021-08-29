@@ -128,7 +128,7 @@
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
                                     <td>
-                                        <a href="">
+                                        <a href="" wire:click.prevent="edit({{ $user }})">
                                             <i class="fas fa-edit text-warning m2-2"></i>
                                         </a>
                                         <a href="">
@@ -154,33 +154,45 @@
     <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header  p-0 bg-gray-dark d-flex justify-content-center">
-                    <h3 class="text-light" id="exampleModalLabel">Add New User</h3>
+                    <h3 class="text-light" id="exampleModalLabel">
+                        @if ($showEditModal)
+                          <span>Edit User</span>
+                          @else  
+                          <span>Add New User</span>
+                        @endif
+                    </h3>
                 </div>
                 <div class="modal-body">
-                    <form autocomplete="true" wire:submit.prevent="createUser">
+                    <form autocomplete="true" wire:submit.prevent="{{ $showEditModal ? 'UpdateUser' : 'createUser'}}">
                         <div class="form-group">
                             <label for="name">User Name</label>
-                            <input type="text" wire:model.defer="name" class="form-control @error('name') is-invalid  @enderror" id="name" aria-describedby="emailHelp" placeholder="Enter your name">
+                            <input type="text" wire:model.defer="state.name" class="form-control @error('name') is-invalid  @enderror" id="name" aria-describedby="emailHelp" placeholder="Enter your name">
                             @error('name') <div class="invalid-feedback">{{ $message }}</div> @enderror
                         </div>
                         <div class="form-group">
                         <label for="email">Email address</label>
-                        <input type="email" wire:model="email" class="form-control @error('email') is-invalid  @enderror" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+                        <input type="email" wire:model.defer="state.email" class="form-control @error('email') is-invalid  @enderror" id="email" aria-describedby="emailHelp" placeholder="Enter email">
                         @error('email') <div class="invalid-feedback">{{ $message }}</div> @enderror
                         </div>
                         <div class="form-group">
                         <label for="password">Password</label>
-                        <input type="password" wire:model.lazy="password" class="form-control @error('password') is-invalid  @enderror" id="password" placeholder="Password">
+                        <input type="password" wire:model.defer="state.password" class="form-control @error('password') is-invalid  @enderror" id="password" placeholder="Password">
                         @error('password') <div class="invalid-feedback">{{ $message }}</div> @enderror
                         </div>
                         <div class="form-group">
                         <label for="cpassword">Confirm Password</label>
-                        <input type="password" wire:model.lazy="password_confirmation" class="form-control" id="cpassword" placeholder="Confirm Password">
+                        <input type="password" wire:model.defer="state.password_confirmation" class="form-control" id="cpassword" placeholder="Confirm Password">
                         
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancle</button>
-                            <button type="submit" class="btn btn-primary">Save</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times mr-1"></i>Cancle</button>
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-save mr-1"></i> 
+                             @if ($showEditModal)
+                                <span>Update</span> 
+                             @else
+                                <span>Save</span>
+                             @endif
+                            </button>
                         </div>
                     </form>
                 </div>
