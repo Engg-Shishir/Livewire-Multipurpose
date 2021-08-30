@@ -102,7 +102,7 @@
                         </div>
                     </div><!--card-header -->
                     <div class="card-body">
-{{--                         <div>
+                         {{--<div>
                             @if (session()->has('message'))
                             <div class="alert alert-warning alert-dismissible fade show mb-2" role="alert">
                                 <strong>{{ session('message') }}</strong> 
@@ -111,7 +111,7 @@
                                 </button>
                               </div>
                             @endif
-                        </div> --}}
+                        </div>--}}
                         <table class="table table-hover table-dark">
                             <thead>
                                 <tr>
@@ -128,10 +128,10 @@
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
                                     <td>
-                                        <a href="" wire:click.prevent="edit({{ $user }})">
+                                        <a href="" wire:click.prevent="userEdit({{ $user }})">
                                             <i class="fas fa-edit text-warning m2-2"></i>
                                         </a>
-                                        <a href="">
+                                        <a href="" wire:click.prevent="userDelete({{ $user->id }})">
                                             <i class="fas fa-trash text-danger"></i>
                                         </a>
                                     </td>
@@ -200,6 +200,26 @@
     </div>
   </div>
 
+    <!-- Modal -->
+    <div class="modal fade" id="deleteUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
+        <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header  p-0 bg-danger d-flex justify-content-center">
+                        <h3 class="text-light">
+                           Confirm Delete User !
+                        </h3>
+                    </div>
+                    <div class="modal-body d-flex justify-content-center">
+                        <img src="{{ asset('image/danger.png') }}" height="300px" width="300px"alt="">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times mr-1"></i>Cancle</button>
+                        <button  type="button" wire:click.prevent="confirmUserDelete" class="btn btn-danger"><i class="fa fa-trash mr-1"></i>Delete</button>
+                    </div>
+                </div>
+        </div>
+      </div>
+
 
 
 </div>
@@ -212,10 +232,17 @@
         $('#addUserForm').modal('show');
     });
 
-    
-  
   window.addEventListener('closeAddUserModal', event =>{
         $('#addUserForm').modal('hide');
+        toastr.success(event.detail.message, 'Success!');
+  });
+  
+  window.addEventListener('showDeleteUserModal', event =>{
+        $('#deleteUserModal').modal('show');
+  });
+
+  window.addEventListener('hideDeleteUserModal', event =>{
+        $('#deleteUserModal').modal('hide');
         toastr.success(event.detail.message, 'Success!');
   });
 </script>

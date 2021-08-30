@@ -32,6 +32,7 @@
   @livewireStyles
   <script>
     $(document).readey(function(){
+      
       toaster.options = {
         "positionClass": "toast-top-right",
         "closeButton": true,

@@ -1,19 +1,20 @@
 <?php
 
 namespace App\Http\Livewire\Admin\User;
-use Illuminate\Http\Request;
+use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Livewire\Component;
-
-use App\Models\User;
 
 
 
 class ListUsers extends Component
 {
+
+
     public $showEditModal = false;
     public $state =[];
     public $user;
+    public $userId;
 
     public function openAddUserModal()
     {
@@ -35,12 +36,13 @@ class ListUsers extends Component
 
 
       User::create($validatedData);
+      $this->state = [];
       $this->dispatchBrowserEvent('closeAddUserModal',['message'=>'User added successfully']);
 
       /* session()->flash('message', 'Comment added successfully 😁'); */
     }
 
-   public function edit( User $user)
+   public function userEdit( User $user)
    {
      # code...
      $this->showEditModal = true;
@@ -49,6 +51,21 @@ class ListUsers extends Component
     /*  dd($user->toArray()); */
      $this->dispatchBrowserEvent('openAddUserModal');
      
+   }
+ 
+   public function userDelete($id)
+   {
+     # code...
+     $this->userId = $id;
+      $this->dispatchBrowserEvent('showDeleteUserModal');
+   }
+   public function confirmUserDelete()
+   {
+     # code...
+     $user = User::findOrFail($this->userId);
+     $user->delete();
+     $this->dispatchBrowserEvent('showDeleteUserModal');
+     $this->dispatchBrowserEvent('hideDeleteUserModal',['message'=>'User Deleted successfully']);
    }
 
    public function UpdateUser(){
