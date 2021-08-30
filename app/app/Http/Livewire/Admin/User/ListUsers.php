@@ -4,11 +4,17 @@ namespace App\Http\Livewire\Admin\User;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Livewire\Component;
+use Livewire\withPagination;
 
 
 
 class ListUsers extends Component
 {
+    // This stop pagination browser refresh 
+    use withPagination;
+    // By default , Livewire pagination use Tailwind css Theme.But here we use bootstrap Theme.
+    //If you want to use Tailwind CSS Theme bydefault uou dont need this line of code  
+    protected $paginationTheme = 'bootstrap';
 
 
     public $showEditModal = false;
@@ -93,7 +99,7 @@ class ListUsers extends Component
 
     public function render()
     {
-        $users = User::latest()->paginate();
+        $users = User::latest()->paginate(5);
 
         return view('livewire.admin.user.list-users',[
           'users' => $users,

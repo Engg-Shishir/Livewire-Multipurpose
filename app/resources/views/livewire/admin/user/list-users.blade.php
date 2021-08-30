@@ -140,6 +140,9 @@
                             </tbody>
                             </table>
                     </div><!--card-body -->
+                    <div class="card-footer d-flex justify-content-end">
+                       {{ $users->links() }}
+                    </div>
                 </div>
                 <!--card-->
             </section>
