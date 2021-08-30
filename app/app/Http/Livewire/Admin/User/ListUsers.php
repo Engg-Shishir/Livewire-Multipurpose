@@ -2,21 +2,14 @@
 
 namespace App\Http\Livewire\Admin\User;
 use App\Models\User;
-use Illuminate\Support\Facades\Validator;
-use Livewire\Component;
-use Livewire\withPagination;
+
+use App\Http\Livewire\Admin\AdminComponent;
 
 
 
-class ListUsers extends Component
+// This Component Extends our self created AdminComponent
+class ListUsers extends AdminComponent
 {
-    // This stop pagination browser refresh 
-    use withPagination;
-    // By default , Livewire pagination use Tailwind css Theme.But here we use bootstrap Theme.
-    //If you want to use Tailwind CSS Theme bydefault uou dont need this line of code  
-    protected $paginationTheme = 'bootstrap';
-
-
     public $showEditModal = false;
     public $state =[];
     public $user;
