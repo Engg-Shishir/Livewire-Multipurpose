@@ -29,9 +29,11 @@
                                 <i class="fas fa-chart-pie mr-1"></i>Sales
                             </h3>
 
-                            <button class="btn btn-dark" wire:click.prevent="openAddUserModal">
-                                <i class="fas fa-plus text-danger m2-2"></i> Add Appoinments
-                            </button>
+                             <a href="{{ route('admin.appoinments.create') }}">
+                                <button class="btn btn-dark">
+                                    <i class="fas fa-plus text-danger m2-2"></i> Add Appoinments
+                                </button>
+                             </a>
                             </div>
                         </div><!--card-header -->
                         <div class="card-body">
