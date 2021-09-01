@@ -2,9 +2,6 @@
 namespace App\Http\Livewire\Admin;
 use Livewire\Component;
 
-// For Make Viladion
-use Illuminate\Support\Facades\Validator;
-
 // For Pagination system
 use Livewire\withPagination;
 

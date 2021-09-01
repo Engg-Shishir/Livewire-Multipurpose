@@ -5,6 +5,10 @@ use App\Models\User;
 
 use App\Http\Livewire\Admin\AdminComponent;
 
+// For Make Viladion
+use Illuminate\Support\Facades\Validator;
+
+
 
 
 // This Component Extends our self created AdminComponent

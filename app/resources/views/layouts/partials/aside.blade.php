@@ -85,6 +85,15 @@
               </li>
             </ul>
           </li>
+          
+          <li class="nav-item has-treeview menu-open">
+            <a href="{{ route('admin.appoinments') }}" class="nav-link {{ request()->is('admin/appoinments') ? 'active': '' }}">
+              <i class="nav-icon fas fa-calandar-alt"></i>
+              <p>
+                Appoinments
+              </p>
+            </a>
+          </li>
 
            <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
 
