@@ -14,4 +14,21 @@ class Appoinment extends Model
     	'time' => 'datetime',
      /*    'members' => 'array', */
     ];
+
+    // Access Client data
+    public function client()
+    {
+    	return $this->belongsTo(Client::class);
+    }
+
+    // Show Appoinment badge Dynamacally
+    public function getStatusBadgeAttribute()
+    {
+    	$badges = [
+    		'SCHEDULED' => 'primary',
+    		'CLOSED' => 'success',
+    	];
+
+    	return $badges[$this->status];
+    }
 }

@@ -50,12 +50,15 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach ($appoinments as  $appoinment)
                                         <tr>
-                                            <th scope="row">1</th>
-                                            <td>Shishir</td>
-                                            <td>Date</td>
-                                            <td>Time</td>
-                                            <td>Status</td>
+                                            <th scope="row">{{ $loop->iteration }}</th>
+                                            <td>{{ $appoinment->client->name }}</td>
+                                            <td>{{ $appoinment->date->toFormattedDate() }}</td>
+                                            <td>{{ $appoinment->time->toFormattedTime() }}</td>
+                                            <td>
+                                                <span class="badge badge-{{ $appoinment->status_badge }}">{{ $appoinment->status }}</span>
+                                            </td>
                                             <td>
                                                 <a href="">
                                                     <i class="fas fa-edit text-warning m2-2"></i>
@@ -64,7 +67,9 @@
                                                     <i class="fas fa-trash text-danger"></i>
                                                 </a>
                                             </td>
-                                        </tr>
+                                        </tr>                                        
+                                    @endforeach
+
                                 
                                 </tbody>
                                 </table>
