@@ -10,15 +10,21 @@ use Illuminate\Support\Facades\Validator;
 
 class CreateAppoinmentForm extends Component
 {
-    public $state = [];
-
+    public $state = ['status' => 'SCHEDULED'];
 	public function createAppointment()
 	{
         //dd($this->state);
-        $this->state['status'] = 'Status';
+        Validator::make($this->state,[
+				'client_id' => 'required',
+				'date' => 'required',
+				'time' => 'required',
+				'note' => 'nullable',
+				'status' => 'required|in:SCHEDULED,CLOSED',],
+			['client_id.required' => 'The client field is required.'])->validate();
         
 		Appoinment::create($this->state);
-		/* $this->dispatchBrowserEvent('alert', ['message' => 'Appointment created successfully!']); */
+
+		$this->dispatchBrowserEvent('createAppoinment', ['message' => 'Appointment created successfully!']);
 	}
 
     public function render()

@@ -109,32 +109,11 @@
 
 {{-- For Tostar Message --}}
 <script src="{{ asset('backend/plugins/toastr/toastr.min.js') }}"></script>
+ {{-- Html ZEditor Form --}}
+<script src="https://cdn.ckeditor.com/ckeditor5/29.2.0/classic/ckeditor.js"></script>
 
 
-<script>
-  $(document).ready(function(){
-    $('#appointmentDate').datetimepicker({
-          format: 'L'
-    });
-
-    $('#appointmentDate').on("change.datetimepicker", function(e){
-      let date = $(this).data('appoinmentdate');
-      eval(date).set('state.date', $('#appointmentDateInput').val());
-    });
-
-    
-    $('#appointmentTime').datetimepicker({
-          format: 'LT'
-    });
-
-    $('#appointmentTime').on("change.datetimepicker", function(e){
-      let time = $(this).data('appoinmenttime');
-      eval(time).set('state.time', $('#appointmentTimeInput').val());
-    });
-  });
-</script>
-
-
+@stack('js')
 
 @livewireScripts
 </body>
