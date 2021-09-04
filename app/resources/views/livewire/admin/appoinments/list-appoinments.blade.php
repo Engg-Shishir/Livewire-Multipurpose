@@ -54,16 +54,16 @@
                                         <tr>
                                             <th scope="row">{{ $loop->iteration }}</th>
                                             <td>{{ $appoinment->client->name }}</td>
-                                            <td>{{ $appoinment->date->toFormattedDate() }}</td>
-                                            <td>{{ $appoinment->time->toFormattedTime() }}</td>
+                                            <td>{{ $appoinment->date }}</td>
+                                            <td>{{ $appoinment->time }}</td>
                                             <td>
                                                 <span class="badge badge-{{ $appoinment->status_badge }}">{{ $appoinment->status }}</span>
                                             </td>
                                             <td>
-                                                <a href="">
+                                                <a href="{{ route('admin.appoinments.edit', $appoinment) }}">
                                                     <i class="fas fa-edit text-warning m2-2"></i>
                                                 </a>
-                                                <a href="">
+                                                <a href="" wire:click.prevent = "confirmAppoinmentRemoval({{ $appoinment->id }})">
                                                     <i class="fas fa-trash text-danger"></i>
                                                 </a>
                                             </td>
@@ -89,22 +89,29 @@
 
 
 <script>
-    window.addEventListener('openAddUserModal', event =>{
-        $('#addUserForm').modal('show');
-    });
-
-  window.addEventListener('closeAddUserModal', event =>{
-        $('#addUserForm').modal('hide');
-        toastr.success(event.detail.message, 'Success!');
+  window.addEventListener('showDeleteAppoinmentConfirmation', event =>{
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't to delete this Appoinment",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+              Livewire.emit('appoinmentDeleteConfirmed')
+            }
+        })
   });
-  
-  window.addEventListener('showDeleteUserModal', event =>{
-        $('#deleteUserModal').modal('show');
-  });
 
-  window.addEventListener('hideDeleteUserModal', event =>{
-        $('#deleteUserModal').modal('hide');
-        toastr.success(event.detail.message, 'Success!');
+  window.addEventListener('alertSuccess', event =>{
+        Swal.fire(
+            'Deleted!',
+            event.detail.message ,
+            'success'
+        )
+        
   });
 </script>
 

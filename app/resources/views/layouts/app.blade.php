@@ -22,6 +22,7 @@
 
   {{-- For Tostar Message --}}
   <link href="{{ asset('backend/plugins/toastr/toastr.min.css') }}" rel="stylesheet"/>
+  
 
 
 
@@ -108,10 +109,11 @@
 <script src="{{ asset('backend/dist/js/demo.js') }}"></script>
 
 {{-- For Tostar Message --}}
-<script src="{{ asset('backend/plugins/toastr/toastr.min.js') }}"></script>
+<script src="{{ asset('/pluginsbackend/plugins/toastr/toastr.min.js') }}"></script>
  {{-- Html ZEditor Form --}}
 <script src="https://cdn.ckeditor.com/ckeditor5/29.2.0/classic/ckeditor.js"></script>
 
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 @stack('js')
 

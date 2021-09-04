@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
+
 
 class Appoinment extends Model
 {
@@ -30,5 +32,15 @@ class Appoinment extends Model
     	];
 
     	return $badges[$this->status];
+    }
+
+    public function getDateAttribute($value)
+    {
+        return Carbon::parse($value)->toFormattedDate();
+    }
+
+    public function getTimeAttribute($value)
+    {
+        return Carbon::parse($value)->toFormattedTime();
     }
 }
