@@ -18,6 +18,7 @@ class ListUsers extends AdminComponent
     public $state =[];
     public $user;
     public $userId;
+    public $searchUser = null;
 
     public function openAddUserModal()
     {
@@ -96,7 +97,11 @@ class ListUsers extends AdminComponent
 
     public function render()
     {
-        $users = User::latest()->paginate(5);
+
+        $users = User::query()
+        ->where('name','like','%'.$this->searchUser.'%')
+        ->where('email','like','%'.$this->searchUser.'%')
+        ->latest()->paginate(5);
 
         return view('livewire.admin.user.list-users',[
           'users' => $users,

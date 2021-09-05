@@ -23,10 +23,10 @@
   {{-- For Tostar Message --}}
   <link href="{{ asset('backend/plugins/toastr/toastr.min.css') }}" rel="stylesheet"/>
   
-
-
-
   @livewireStyles
+  @stack('styles')
+
+  
   <script>
     $(document).readey(function(){
       

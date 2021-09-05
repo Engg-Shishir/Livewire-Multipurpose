@@ -92,13 +92,10 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
                         <div class="d-flex justify-content-between w-100">
-                        <h3 class="card-title">
-                            <i class="fas fa-chart-pie mr-1"></i>Sales
-                        </h3>
-
-                        <button class="btn btn-dark" wire:click.prevent="openAddUserModal">
-                            <i class="fas fa-plus text-danger m2-2"></i> Add User
-                        </button>
+                                <button class="btn btn-dark" wire:click.prevent="openAddUserModal">
+                                    <i class="fas fa-plus text-danger m2-2"></i> Add User
+                                </button>
+                                <x-search-input wire:model.delay="searchUser"/>
                         </div>
                     </div><!--card-header -->
                     <div class="card-body">
@@ -121,8 +118,8 @@
                                 <th scope="col">Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                @foreach ($users as $key => $user)
+                            <tbody wire:loading.class="searchLoading">
+                                @forelse ($users as $key => $user)
                                     <tr>
                                     <th scope="row">{{ $key + 1 }}</th>
                                     <td>{{ $user->name }}</td>
@@ -136,7 +133,16 @@
                                         </a>
                                     </td>
                                     </tr>
-                                @endforeach
+                                    @empty
+                                    <tr>
+                                        <td colspan="5" class="text-center">
+                                             <img src="{{ asset('image/search.svg') }}" alt="">
+                                             <br><br>
+                                             <p>No Results Found</p>
+                                        </td>         
+                                    </tr>
+
+                                @endforelse
                             </tbody>
                             </table>
                     </div><!--card-body -->
