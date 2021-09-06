@@ -25,15 +25,28 @@
                     <div class="card">
                         <div class="card-header d-flex justify-content-between">
                             <div class="d-flex justify-content-between w-100">
-                            <h3 class="card-title">
-                                <i class="fas fa-chart-pie mr-1"></i>Sales
-                            </h3>
-
-                             <a href="{{ route('admin.appoinments.create') }}">
-                                <button class="btn btn-dark">
-                                    <i class="fas fa-plus text-danger m2-2"></i> Add Appoinments
-                                </button>
-                             </a>
+                                <a href="{{ route('admin.appoinments.create') }}">
+                                   <button class="btn btn-dark">
+                                       <i class="fas fa-plus text-danger m2-2"></i> Add Appoinments
+                                   </button>
+                                </a>
+   
+                                <div class="btn-group">
+                                   <button  wire:click="filterAppoinmentsByStatus " type="button" class="btn {{ is_null($status) ? 'btn-secondary' : 'btn-default' }}">
+                                     <span class="mr-1">All</span> 
+                                     <span class="badge badge-pill badge-info">{{ $appoinmentsCount }}</span>
+                                   </button>
+                                 
+                                   <button wire:click="filterAppoinmentsByStatus('scheduled')" type="button" class="btn {{ ($status=='scheduled' ? 'btn-secondary' : 'btn-default') }}">
+                                     <span class="mr-1">Scheduled</span>
+                                     <span class="badge badge-pill badge-primary">{{ $scheduledAppoinmentsCount }}</span>
+                                   </button>
+                                 
+                                   <button wire:click="filterAppoinmentsByStatus('closed')" type="button" class="btn {{ ($status=='closed' ? 'btn-secondary' : 'btn-default') }}">
+                                     <span class="mr-1">Closed</span>
+                                     <span class="badge badge-pill badge-success">{{ $closedAppoinmentsCount }}</span>
+                                   </button>
+                                </div>
                             </div>
                         </div><!--card-header -->
                         <div class="card-body">
@@ -75,7 +88,7 @@
                                 </table>
                         </div><!--card-body -->
                         <div class="card-footer d-flex justify-content-end">
-                        
+                          {!! $appoinments->links() !!}
                         </div>
                     </div>
                     <!--card-->

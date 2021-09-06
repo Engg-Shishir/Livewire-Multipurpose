@@ -10,7 +10,9 @@ class ListAppoinments extends AdminComponent
     
     protected $listeners = ['appoinmentDeleteConfirmed'=>'appoinmentDelete'];
     public $appoinmentIdRemoval = null;
-
+    
+    public $status = null;
+    protected $queryString = ['status'];
    
     public function confirmAppoinmentRemoval($id)
     {
@@ -28,15 +30,32 @@ class ListAppoinments extends AdminComponent
         $this->dispatchBrowserEvent('alertSuccess',['message'=>'Appoinment Deleted successfully']);
     }
 
+    public function filterAppoinmentsByStatus($status = null)
+    {
+        $this->resetPage();
+       $this->status = $status;
+    }
+
 
     public function render()
     {
-        $appoinments = Appoinment::with('client')
+        $appoinments = Appoinment::with('client') 
+            ->when($this->status, function($query,$status){
+                return $query->where('status', $status);
+            })
             ->latest()
-            ->paginate();
-            
+            ->paginate(2);
+
+        $appoinmentsCount = Appoinment::count();
+        $scheduledAppoinmentsCount = Appoinment::where('status','scheduled')->count();
+        $closedAppoinmentsCount = Appoinment::where('status','closed')->count();
+
+
         return view('livewire.admin.appoinments.list-appoinments',[
             'appoinments'=> $appoinments,
+            'appoinmentsCount'=> $appoinmentsCount,
+            'scheduledAppoinmentsCount'=>$scheduledAppoinmentsCount,
+            'closedAppoinmentsCount'=> $closedAppoinmentsCount,
         ]);
     }
 }
