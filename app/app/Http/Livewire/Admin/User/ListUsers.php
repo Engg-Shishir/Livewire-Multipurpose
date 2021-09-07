@@ -9,19 +9,26 @@ use App\Http\Livewire\Admin\AdminComponent;
 use Illuminate\Support\Facades\Validator;
 
 
+use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Storage;
+
 
 
 // This Component Extends our self created AdminComponent
 class ListUsers extends AdminComponent
 {
+    use  WithFileUploads;
     public $showEditModal = false;
     public $state =[];
     public $user;
     public $userId;
     public $searchUser = null;
+    public $photo;
+
 
     public function openAddUserModal()
     {
+      $this->reset();
       $this->showEditModal = false;
        $this->dispatchBrowserEvent('openAddUserModal');
     }
@@ -37,10 +44,14 @@ class ListUsers extends AdminComponent
       ])->validate();
 
        $validatedData['password'] = bcrypt( $validatedData['password']);
+       
+
+       if ($this->photo) {
+         $validatedData['avatar'] = $this->photo->store('/', 'avatars');
+       }
 
 
       User::create($validatedData);
-      $this->state = [];
       $this->dispatchBrowserEvent('closeAddUserModal',['message'=>'User added successfully']);
 
       /* session()->flash('message', 'Comment added successfully 😁'); */
@@ -53,6 +64,7 @@ class ListUsers extends AdminComponent
      $this->user = $user;
      $this->state = $user->toArray();
     /*  dd($user->toArray()); */
+    // dd($this->state);
      $this->dispatchBrowserEvent('openAddUserModal');
      
    }
@@ -89,6 +101,13 @@ class ListUsers extends AdminComponent
     /*if(!$validatedData['password']=''){
       $validatedData['password'] = bcrypt( $validatedData['password']);
     }*/
+       
+
+
+		if ($this->photo) {
+			Storage::disk('avatars')->delete($this->user->avatar);
+			$validatedData['avatar'] = $this->photo->store('/', 'avatars');
+		}
 
       $this->user->update($validatedData);
       $this->dispatchBrowserEvent('closeAddUserModal',['message'=>'User Updated successfully']);

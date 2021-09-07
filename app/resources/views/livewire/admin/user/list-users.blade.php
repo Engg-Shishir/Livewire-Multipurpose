@@ -113,6 +113,7 @@
                             <thead>
                                 <tr>
                                 <th scope="col">#</th>
+                                <th scope="col">Image</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Action</th>
@@ -122,6 +123,13 @@
                                 @forelse ($users as $key => $user)
                                     <tr>
                                     <th scope="row">{{ $key + 1 }}</th>
+                                    <td>
+                                        @if ($user->avatar)
+                                        <img src="{{ asset('storage/avatars/'.$user->avatar) }}" style="width: 70px; height:70px;">
+                                        @else
+                                        <img src="{{url('noimage.png')}}" style="width: 70px; height:70px;" alt="">
+                                        @endif
+                                    </td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
                                     <td>
@@ -179,19 +187,37 @@
                             @error('name') <div class="invalid-feedback">{{ $message }}</div> @enderror
                         </div>
                         <div class="form-group">
-                        <label for="email">Email address</label>
-                        <input type="email" wire:model.defer="state.email" class="form-control @error('email') is-invalid  @enderror" id="email" aria-describedby="emailHelp" placeholder="Enter email">
-                        @error('email') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                            <label for="email">Email address</label>
+                            <input type="email" wire:model.defer="state.email" class="form-control @error('email') is-invalid  @enderror" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+                            @error('email') <div class="invalid-feedback">{{ $message }}</div> @enderror
                         </div>
                         <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" wire:model.defer="state.password" class="form-control @error('password') is-invalid  @enderror" id="password" placeholder="Password">
-                        @error('password') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                            <label for="password">Password</label>
+                            <input type="password" wire:model.defer="state.password" class="form-control @error('password') is-invalid  @enderror" id="password" placeholder="Password">
+                            @error('password') <div class="invalid-feedback">{{ $message }}</div> @enderror
                         </div>
                         <div class="form-group">
-                        <label for="cpassword">Confirm Password</label>
-                        <input type="password" wire:model.defer="state.password_confirmation" class="form-control" id="cpassword" placeholder="Confirm Password">
-                        
+                            <label for="cpassword">Confirm Password</label>
+                            <input type="password" wire:model.defer="state.password_confirmation" class="form-control" id="cpassword" placeholder="Confirm Password">
+                        </div>
+                        <div class="form-group">
+                            <label for="customFile">Custom Photo</label>
+                            @if ($photo)
+                                <img src="{{ $photo->temporaryUrl() }}" class="img d-block mt-2 w-100 rounded">
+                            @else
+                                <img src="{{ $state['avatar_url'] ?? '' }}" class="img d-block mb-2 w-100 rounded" >
+                            @endif
+                            
+                            <div class="custom-file">
+                              <input wire:model="photo" type="file" class="custom-file-input" id="customFile">
+                              <label class="custom-file-label" for="customFile">
+                                  @if ($photo)
+                                    {{ $photo->getClientOriginalName() }}
+                                  @else
+                                     Choose file
+                                  @endif
+                              </label>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times mr-1"></i>Cancle</button>
