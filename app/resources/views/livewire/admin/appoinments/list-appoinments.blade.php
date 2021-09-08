@@ -1,5 +1,6 @@
 <div>
-
+    {{-- Loading Indicator --}}
+    <x-loading-indicator />
 
 
     <!-- Content Header (Page header) -->
