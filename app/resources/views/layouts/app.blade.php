@@ -23,6 +23,9 @@
   {{-- For Tostar Message --}}
   <link href="{{ asset('backend/plugins/toastr/toastr.min.css') }}" rel="stylesheet"/>
   
+  {{-- Alopine Js For progress bar --}}
+  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+
   @livewireStyles
   @stack('styles')
 

@@ -28,8 +28,8 @@ class ListUsers extends AdminComponent
 
     public function openAddUserModal()
     {
-      $this->reset();
-      $this->showEditModal = false;
+       $this->reset();
+       $this->showEditModal = false;
        $this->dispatchBrowserEvent('openAddUserModal');
     }
 
@@ -60,6 +60,7 @@ class ListUsers extends AdminComponent
    public function userEdit( User $user)
    {
      # code...
+     $this->reset();
      $this->showEditModal = true;
      $this->user = $user;
      $this->state = $user->toArray();
