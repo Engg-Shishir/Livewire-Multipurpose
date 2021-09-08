@@ -32,7 +32,7 @@ class UpdateAppoinmentForm extends Component
         
 		$this->appoinment->update($this->state);
 
-		$this->dispatchBrowserEvent('updateAppoinment', ['message' => 'Appointment Updated successfully!']);
+		$this->dispatchBrowserEvent('SuccessAlert', ['message' => 'Appointment Updated successfully!']);
 	}
 
 

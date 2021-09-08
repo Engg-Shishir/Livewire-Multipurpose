@@ -171,11 +171,12 @@
                         console.error( error );
                 });
 
-            // Alert for Create Appoinment   
-            window.addEventListener('createAppoinment', event =>{
-                toastr.success(event.detail.message, 'Success!');
-            });
-            
+                window.addEventListener('alertSuccess', event =>{
+                        Swal.fire(
+                            event.detail.message ,
+                            'success'
+                        )
+                });
         </script>
     @endpush
 </div>

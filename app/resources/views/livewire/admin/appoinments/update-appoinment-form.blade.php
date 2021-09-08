@@ -170,11 +170,6 @@
                 .catch( error => {
                         console.error( error );
                 });
-
-            // Alert for Create Appoinment   
-            window.addEventListener('updateAppoinment', event =>{
-                toastr.success(event.detail.message, 'Success!');
-            });
             
         </script>
     @endpush

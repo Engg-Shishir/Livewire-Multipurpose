@@ -29,11 +29,28 @@
                     <div class="card">
                         <div class="card-header d-flex justify-content-between">
                             <div class="d-flex justify-content-between w-100">
-                                <a href="{{ route('admin.appoinments.create') }}">
-                                   <button class="btn btn-dark">
-                                       <i class="fas fa-plus text-danger m2-2"></i> Add Appoinments
-                                   </button>
-                                </a>
+                                <div>
+                                    <a href="{{ route('admin.appoinments.create') }}">
+                                       <button class="btn btn-dark">
+                                           <i class="fas fa-plus text-danger m2-2"></i> Add Appoinments
+                                       </button>
+                                    </a>
+    
+                                    <div class="btn-group ml-2">
+                                        <button type="button" class="btn btn-default">More Action</button>
+                                        <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown" aria-expanded="false">
+                                          <span class="sr-only">Toggle Dropdown</span>
+                                          <div class="dropdown-menu" role="menu">
+                                              <a wire:click.prevent="deleteSelectedRows" class="dropdown-item" href="#">Delete Selected</a>
+                                              <a wire:click.prevent="markAllAsScheduled" class="dropdown-item" href="#">Mark as Scheduled</a>
+                                              <a wire:click.prevent="markAllAsClosed" class="dropdown-item" href="#">Mark as Closed</a>
+                                              <a wire:click.prevent="export" class="dropdown-item" href="#">Export</a>
+                                          </div>
+                                        </button>
+                                    </div>
+                                    
+                                        <span class="ml-2">selected {{ count($selectedRows) }} {{ Str::plural('appointment', count($selectedRows)) }}</span>
+                                </div>
    
                                 <div class="btn-group">
                                    <button  wire:click="filterAppoinmentsByStatus " type="button" class="btn {{ is_null($status) ? 'btn-secondary' : 'btn-default' }}">
@@ -58,7 +75,13 @@
                             <table class="table table-hover table-dark">
                                 <thead>
                                     <tr>
-                                    <th scope="col">#</th>
+                                    <th scope="col">
+                                        <div class="icheck-primary d-inline ml-2">
+                                            <input wire:model="selectPageRows" type="checkbox" value="" name="todo2" id="todoCheck2">
+                                            <label for="todoCheck2"></label>
+                                        </div>
+                                        #
+                                    </th>
                                     <th scope="col">Client Name</th>
                                     <th scope="col">Date</th>
                                     <th scope="col">Time</th>
@@ -69,7 +92,13 @@
                                 <tbody>
                                     @foreach ($appoinments as  $appoinment)
                                         <tr>
-                                            <th scope="row">{{ $loop->iteration }}</th>
+                                            <th scope="row">
+                                                <div class="icheck-primary d-inline ml-2">
+                                                    <input wire:model="selectedRows" type="checkbox" type="checkbox" value="{{ $appoinment->id }}" name="todo2" id="{{ $appoinment->id }}">
+                                                    <label for="{{ $appoinment->id }}"></label>
+                                                </div>
+                                                {{ $loop->iteration }}
+                                            </th>
                                             <td>{{ $appoinment->client->name }}</td>
                                             <td>{{ $appoinment->date }}</td>
                                             <td>{{ $appoinment->time }}</td>
@@ -86,10 +115,9 @@
                                             </td>
                                         </tr>                                        
                                     @endforeach
-
-                                
                                 </tbody>
                                 </table>
+                                {{-- @dump($selectedRows) --}}
                         </div><!--card-body -->
                         <div class="card-footer d-flex justify-content-end">
                           {!! $appoinments->links() !!}
@@ -122,14 +150,17 @@
         })
   });
 
-  window.addEventListener('alertSuccess', event =>{
-        Swal.fire(
-            'Deleted!',
-            event.detail.message ,
-            'success'
-        )
-        
+    window.addEventListener('alertSuccess', event =>{
+            Swal.fire(
+                event.detail.message ,
+                'success'
+            )
+    });
+    
+  window.addEventListener('SuccessAlert', event =>{
+    toastr.success(event.detail.message, 'Success!');
   });
+
 </script>
 
 

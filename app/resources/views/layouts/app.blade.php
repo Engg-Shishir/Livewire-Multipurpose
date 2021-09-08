@@ -26,20 +26,15 @@
   {{-- Alopine Js For progress bar --}}
   <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 
+    <!-- iCheck -->
+    <link rel="stylesheet" href="{{ asset('backend/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
+
+
   @livewireStyles
   @stack('styles')
 
   
-  <script>
-    $(document).readey(function(){
-      
-      toaster.options = {
-        "positionClass": "toast-top-right",
-        "closeButton": true,
-        "progressBar": true,
-      }
-    });
-  </script>
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 
@@ -112,14 +107,33 @@
 <script src="{{ asset('backend/dist/js/demo.js') }}"></script>
 
 {{-- For Tostar Message --}}
-<script src="{{ asset('/pluginsbackend/plugins/toastr/toastr.min.js') }}"></script>
+<script src="{{ asset('backend/plugins/toastr/toastr.min.js') }}"></script>
+
+
  {{-- Html ZEditor Form --}}
 <script src="https://cdn.ckeditor.com/ckeditor5/29.2.0/classic/ckeditor.js"></script>
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-@stack('js')
 
+<script>
+  $(document).readey(function(){
+    toaster.options = {
+      "positionClass": "toast-top-right",
+      "closeButton": true,
+      "progressBar": true,
+    }
+  });
+
+  
+  window.addEventListener('SuccessAlert', event =>{
+    toastr.success(event.detail.message, 'Success!');
+  });
+</script>
+
+
+
+@stack('js')
 @livewireScripts
 </body>
 </html>
