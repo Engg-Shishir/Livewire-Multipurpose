@@ -134,21 +134,21 @@
 
 
 <script>
-  window.addEventListener('showDeleteAppoinmentConfirmation', event =>{
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't to delete this Appoinment",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-              Livewire.emit('appoinmentDeleteConfirmed')
-            }
-        })
-  });
+    window.addEventListener('showDeleteAppoinmentConfirmation', event =>{
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't to delete this Appoinment",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                Livewire.emit('appoinmentDeleteConfirmed')
+                }
+            })
+    });
 
     window.addEventListener('alertSuccess', event =>{
             Swal.fire(
@@ -157,9 +157,9 @@
             )
     });
     
-  window.addEventListener('SuccessAlert', event =>{
-    toastr.success(event.detail.message, 'Success!');
-  });
+    window.addEventListener('SuccessAlert', event =>{
+        toastr.success(event.detail.message, 'Success!');
+    });
 
 </script>
 

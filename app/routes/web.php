@@ -21,9 +21,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('admin/dashboard', DashboardController::class)->name('admin.dashboard');
-Route::get('admin/user', ListUsers::class)->name('admin.user');
-Route::get('admin/appoinments', ListAppoinments::class)->name('admin.appoinments');
-Route::get('admin/appoinments/create', CreateAppoinmentForm::class)->name('admin.appoinments.create');
-
-Route::get('admin/appoinment/{PassAppoinment}/edit', UpdateAppoinmentForm::class)->name('admin.appoinments.edit');
+Route::group(['middleware' => 'auth'],function (){
+    Route::get('admin/dashboard', DashboardController::class)->name('admin.dashboard');
+    Route::get('admin/user', ListUsers::class)->name('admin.user');
+    Route::get('admin/appoinments', ListAppoinments::class)->name('admin.appoinments');
+    Route::get('admin/appoinments/create', CreateAppoinmentForm::class)->name('admin.appoinments.create');
+    Route::get('admin/appoinment/{PassAppoinment}/edit', UpdateAppoinmentForm::class)->name('admin.appoinments.edit');
+});
