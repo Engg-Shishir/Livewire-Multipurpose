@@ -126,7 +126,7 @@
   });
 
   
-  window.addEventListener('SuccessAlert', event =>{
+  window.addEventListener('successAlert', event =>{
     toastr.success(event.detail.message, 'Success!');
   });
 </script>

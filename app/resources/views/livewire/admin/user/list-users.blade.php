@@ -116,6 +116,7 @@
                                 <th scope="col">Image</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Email</th>
+                                <th scope="col">Role</th>
                                 <th scope="col">Action</th>
                                 </tr>
                             </thead>
@@ -132,6 +133,12 @@
                                     </td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
+                                    <td>
+                                      <select class="form-control" wire:change="changeRole({{ $user }}, $event.target.value)">
+                                        <option value="admin" {{ ($user->role === 'admin') ? 'selected' : '' }}>ADMIN</option>
+                                        <option value="user" {{ ($user->role === 'user') ? 'selected' : '' }}>USER</option>
+                                      </select>
+                                    </td>
                                     <td>
                                         <a href="" wire:click.prevent="userEdit({{ $user }})">
                                             <i class="fas fa-edit text-warning m2-2"></i>
@@ -292,6 +299,10 @@
   window.addEventListener('hideDeleteUserModal', event =>{
         $('#deleteUserModal').modal('hide');
         toastr.success(event.detail.message, 'Success!');
+  });
+
+  window.addEventListener('successAlert', event =>{
+    toastr.success(event.detail.message, 'Success!');
   });
 </script>
 
