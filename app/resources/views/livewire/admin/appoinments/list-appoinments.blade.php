@@ -23,6 +23,10 @@
 
     <section class="content">
         <div class="container-fluid">
+            <div class="row">  
+              <livewire:admin.dashboard.appoinments-count />
+            </div>
+            
             <div class="row">
                 <section class="col-lg-12 connectedSortable">
                     <!-- Custom tabs (Charts with tabs)-->

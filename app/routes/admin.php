@@ -6,6 +6,7 @@ use App\Http\Livewire\Admin\User\ListUsers;
 use App\Http\Livewire\Admin\Appoinments\ListAppoinments;
 use App\Http\Livewire\Admin\Appoinments\CreateAppoinmentForm;
 use App\Http\Livewire\Admin\Appoinments\UpdateAppoinmentForm;
+use App\Http\Livewire\Admin\Profile\Update;
 
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');

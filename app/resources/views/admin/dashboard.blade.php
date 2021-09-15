@@ -18,4 +18,12 @@
         </div>
         <!-- content-header -->
     </div>
+    <div class="container-fluid">
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+            
+           <livewire:admin.dashboard.appoinments-count />
+           <livewire:admin.dashboard.user-count />
+        </div>
+    </div>
 </x-admin-layout>
