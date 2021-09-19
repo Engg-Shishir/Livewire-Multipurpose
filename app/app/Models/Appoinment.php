@@ -14,7 +14,7 @@ class Appoinment extends Model
     protected $casts = [
     	'date' => 'datetime',
     	'time' => 'datetime',
-     /*    'members' => 'array', */
+        'members' => 'array',
     ];
 
     // Access Client data

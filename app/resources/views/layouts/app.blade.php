@@ -26,10 +26,14 @@
   {{-- Alopine Js For progress bar --}}
   <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 
-    <!-- iCheck -->
-    <link rel="stylesheet" href="{{ asset('backend/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
+  <!-- iCheck -->
+  <link rel="stylesheet" href="{{ asset('backend/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
 
+  <!-- Select2 -->
+  <link rel="stylesheet" href="{{ asset('backend/plugins/select2/css/select2.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('backend/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
 
+  
   @livewireStyles
   @stack('styles')
 
@@ -110,14 +114,23 @@
 <script src="{{ asset('backend/plugins/toastr/toastr.min.js') }}"></script>
 
 
- {{-- Html ZEditor Form --}}
+{{-- Html ZEditor Form --}}
 <script src="https://cdn.ckeditor.com/ckeditor5/29.2.0/classic/ckeditor.js"></script>
 
+{{-- Sweet Alert Js --}}
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+{{-- Select 2 --}}
+<script src="{{ asset('backend/plugins/select2/js/select2.full.min.js') }}"></script>
+
+
+
 
 
 <script>
   $(document).readey(function(){
+    // Toast Alert
     toaster.options = {
       "positionClass": "toast-top-right",
       "closeButton": true,

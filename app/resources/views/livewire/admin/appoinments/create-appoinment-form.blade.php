@@ -26,7 +26,7 @@
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="client">Client:</label>
                                             <select class="form-control @error('client_id') is-invalid @enderror" wire:model.defer="state.client_id">
@@ -42,7 +42,7 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="client">Status:</label>
                                             <select class="form-control  @error('status') is-invalid @enderror " wire:model.defer="state.status">
@@ -55,6 +55,20 @@
                                                 {{ $message }}
                                             </div>
                                             @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div wire:ignore class="form-group">
+                                            <label>Select Team</label>
+                                            <select class="select2" multiple="multiple" data-placeholder="Select a State" style="width: 100%;">
+                                            <option>Alabama</option>
+                                            <option>Alaska</option>
+                                            <option>California</option>
+                                            <option>Delaware</option>
+                                            <option>Tennessee</option>
+                                            <option>Texas</option>
+                                            <option>Washington</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -141,6 +155,18 @@
         </div>
     </div>
     @push('js')
+       <script>
+            $(function(){
+                // Select2 Option Initialization
+                $('.select2').select2({
+                    theme: 'bootstrap4'
+                }).on('change', function(){
+                    @this.set('state.members',$(this).val());
+                });
+            });
+        </script>
+
+
         <script>
             // Jquery Part Start
             $(document).ready(function(){
