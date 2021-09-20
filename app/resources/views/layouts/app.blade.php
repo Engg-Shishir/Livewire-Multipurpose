@@ -29,8 +29,10 @@
   <!-- iCheck -->
   <link rel="stylesheet" href="{{ asset('backend/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
 
-
+  <!-- Bootstrap Color Picker -->
+  <link rel="stylesheet" href="{{ asset('backend/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css') }}">
   
+
   @livewireStyles
   @stack('styles')
 
@@ -118,7 +120,8 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
-
+<!-- bootstrap color picker -->
+<script src="{{ asset('backend/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js') }}"></script>
 
 
 

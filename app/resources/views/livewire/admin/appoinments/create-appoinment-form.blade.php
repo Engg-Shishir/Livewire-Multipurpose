@@ -81,7 +81,7 @@
                                 </div>
                                 
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="appointmentDate">Appointment Date</label>
                                             <div class="input-group mb-3">
@@ -98,7 +98,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="appointmentTime">Appointment Time</label>
                                             <div class="input-group mb-3">
@@ -114,9 +114,28 @@
                                             </div>                                            
                                         </div>
                                     </div>
+
+                                    <div class="col-md-4">
+                                        <!-- Color Picker -->
+                                        <div class="form-group" wire:ignore.self>
+                                            <label>Color picker:</label>
+                                            <div class="input-group" id="ColorPicker">
+                                                <input name="color" wire:model.defer="state.color" type="text" class="form-control @error('color') is-invalid @enderror">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><i class="fas fa-square"></i></span>
+                                                </div>
+                                            </div>
+                                            @error('color')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                        </div>
+                                        <!-- /.form group -->
+                                    </div>
                                 </div>
                                 
-{{--                                 <div class="row">
+                                 {{--<div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="appointmentStartDate">Appointment Start Date</label>
@@ -140,7 +159,7 @@
                                             </div>                                            
                                         </div>
                                     </div>
-                                </div> --}}
+                                </div>--}}
 
                                 <div class="row">
                                     <div class="col-md-12">
@@ -161,53 +180,26 @@
             </div>
         </div>
     </div>
-    @push('js')
-{{--        <script>
-            $(function(){
-                // Select2 Option Initialization
-                $('.select2').select2({
-                    theme: 'bootstrap4'
-                }).on('change', function(){
-                    @this.set('state.members',$(this).val());
-                });
-            });
-        </script> --}}
-
-
-        <script>
-
-
-            // Code For Html Editor
-            ClassicEditor
-                .create( document.querySelector( '#note' ) )
-                .then( editor => {
-                    editor.model.document.on('change', ()=>{
-                    //Check note result in console for better understand
-                    //let note = $('#note').data('note');
-                    // This Line of code means that...... eval() grave note location & set a (state.note), with specific input note field value
-                    //eval(note).set('state.note', editor.getData());
-                    
-                    // To prvent send multipple request use this part of code.
-                    document.querySelector('#submit').addEventListener('click', () => {
-                        let note= $('#note').data('note');
-                        eval(note).set('state.note', editor.getData());
-                    });
-
-                    
-                    });
-                } )
-                .catch( error => {
-                        console.error( error );
-                });
-
-                window.addEventListener('alertSuccess', event =>{
-                        Swal.fire(
-                            event.detail.message ,
-                            'success'
-                        )
-                });
-        </script>
-    @endpush
 </div>
+
+
+@push('js')
+    <script>
+        //Initialize color Picker
+        $('#ColorPicker').colorpicker().on('change', function(event) {
+            // Show color Preview
+            $('#ColorPicker .fa-square').css('color', event.color.toString());
+        });
+    </script>
+    
+    <script>
+        ClassicEditor.create(document.querySelector('#note'));
+        $('form').submit(function() {
+            @this.set('state.members', $('#members').val());
+            @this.set('state.note', $('#note').val());
+            @this.set('state.color', $('[name=color]').val());
+        })
+    </script>
+@endpush
 
 
