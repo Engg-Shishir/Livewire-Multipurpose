@@ -29,9 +29,6 @@
   <!-- iCheck -->
   <link rel="stylesheet" href="{{ asset('backend/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
 
-  <!-- Select2 -->
-  <link rel="stylesheet" href="{{ asset('backend/plugins/select2/css/select2.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('backend/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
 
   
   @livewireStyles
@@ -120,9 +117,6 @@
 {{-- Sweet Alert Js --}}
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-
-{{-- Select 2 --}}
-<script src="{{ asset('backend/plugins/select2/js/select2.full.min.js') }}"></script>
 
 
 

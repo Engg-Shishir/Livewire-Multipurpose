@@ -97,20 +97,20 @@
                                     <div class="col-md-4">
                                         <div wire:ignore class="form-group">
                                             <label>Select Team</label>
-                                            <select class="select2" wire:model="state.members"  id="members" multiple="multiple" data-placeholder="Select a State" style="width: 100%;">
-                                            <option>Alabama</option>
-                                            <option>Alaska</option>
-                                            <option>California</option>
-                                            <option>Delaware</option>
-                                            <option>Tennessee</option>
-                                            <option>Texas</option>
-                                            <option>Washington</option>
-                                            </select>
+                                            <x-inputs.select2 wire:model="state.members" id="members" placeholder="Select Members">
+                                                <option>One</option>
+                                                <option>Alaska</option>
+                                                <option>California</option>
+                                                <option>Delaware</option>
+                                                <option>Tennessee</option>
+                                                <option>Texas</option>
+                                                <option>Washington</option>
+                                            </x-inputs.select2>
                                         </div>
                                     </div>
                                 </div>
                                 
-{{--                                 <div class="row">
+                                 {{--<div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="appointmentStartDate">Appointment Start Date</label>
@@ -134,7 +134,7 @@
                                             </div>                                            
                                         </div>
                                     </div>
-                                </div> --}}
+                                </div>--}}
 
                                 <div class="row">
                                     <div class="col-md-12">
@@ -155,43 +155,33 @@
             </div>
         </div>
     </div>
-    @push('js')
-        <script>
-                $(function(){
-                    // Select2 Option Initialization
-                    $('.select2').select2({
-                        theme: 'bootstrap4'
-                    }).on('change', function(){
-                        @this.set('state.members',$(this).val());
-                    });
-                });
-            </script>
-        <script>
-            // Code For Html Editor
-            ClassicEditor
-                .create( document.querySelector( '#note' ) )
-                .then( editor => {
-                    editor.model.document.on('change', ()=>{
-                    //Check note result in console for better understand
-                    //let note = $('#note').data('note');
-                    // This Line of code means that...... eval() grave note location & set a (state.note), with specific input note field value
-                    //eval(note).set('state.note', editor.getData());
-                    
-                    // To prvent send multipple request use this part of code.
-                    document.querySelector('#submit').addEventListener('click', () => {
-                        let note= $('#note').data('note');
-                        eval(note).set('state.note', editor.getData());
-                    });
-
-                    
-                    });
-                } )
-                .catch( error => {
-                        console.error( error );
-                });
-            
-        </script>
-    @endpush
 </div>
 
 
+@push('js')
+<script>
+    // Code For Html Editor
+    ClassicEditor
+        .create( document.querySelector( '#note' ) )
+        .then( editor => {
+            editor.model.document.on('change', ()=>{
+            //Check note result in console for better understand
+            //let note = $('#note').data('note');
+            // This Line of code means that...... eval() grave note location & set a (state.note), with specific input note field value
+            //eval(note).set('state.note', editor.getData());
+            
+            // To prvent send multipple request use this part of code.
+            document.querySelector('#submit').addEventListener('click', () => {
+                let note= $('#note').data('note');
+                eval(note).set('state.note', editor.getData());
+            });
+
+            
+            });
+        } )
+        .catch( error => {
+                console.error( error );
+        });
+    
+</script>
+@endpush

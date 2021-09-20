@@ -58,17 +58,24 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4">
-                                        <div wire:ignore class="form-group">
-                                            <label>Select Team</label>
-                                            <select class="select2" multiple="multiple" data-placeholder="Select a State" style="width: 100%;">
-                                            <option>Alabama</option>
-                                            <option>Alaska</option>
-                                            <option>California</option>
-                                            <option>Delaware</option>
-                                            <option>Tennessee</option>
-                                            <option>Texas</option>
-                                            <option>Washington</option>
-                                            </select>
+                                        <div class="form-group">
+                                            <label>Select Team Members</label>
+                                            <div class="@error('members') is-invalid border border-danger rounded custom-error @enderror">
+                                                <x-inputs.select2 wire:model="state.members" id="members" placeholder="Select Members">
+                                                    <option>One</option>
+                                                    <option>Alaska</option>
+                                                    <option>California</option>
+                                                    <option>Delaware</option>
+                                                    <option>Tennessee</option>
+                                                    <option>Texas</option>
+                                                    <option>Washington</option>
+                                                </x-inputs.select2>
+                                            </div>
+                                            @error('members')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
@@ -155,7 +162,7 @@
         </div>
     </div>
     @push('js')
-       <script>
+{{--        <script>
             $(function(){
                 // Select2 Option Initialization
                 $('.select2').select2({
@@ -164,14 +171,10 @@
                     @this.set('state.members',$(this).val());
                 });
             });
-        </script>
+        </script> --}}
 
 
         <script>
-            // Jquery Part Start
-            $(document).ready(function(){
-            });
-            // Jquery Part End
 
 
             // Code For Html Editor
