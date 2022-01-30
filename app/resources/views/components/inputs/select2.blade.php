@@ -15,10 +15,10 @@
 @endonce
 
 @once
-@push('js')
-<!-- Select2 -->
-<script src="{{ asset('backend/plugins/select2/js/select2.full.min.js') }}"></script>
-@endpush
+    @push('js')
+        <!-- Select2 -->
+        <script src="{{ asset('backend/plugins/select2/js/select2.full.min.js') }}"></script>
+    @endpush
 @endonce
 
 @push('js')

@@ -34,6 +34,8 @@ class ListUsers extends AdminComponent
        $this->showEditModal = false;
        $this->dispatchBrowserEvent('openAddUserModal');
     }
+
+    
     public function createUser()
     {
       $validatedData = Validator::make($this->state,[
@@ -129,6 +131,8 @@ class ListUsers extends AdminComponent
   
       $this->dispatchBrowserEvent('successAlert', ['message' => "Role changed to {$role} successfully."]);
     }
+
+    
 
     public function render()
     {

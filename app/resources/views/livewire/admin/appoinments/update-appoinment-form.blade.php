@@ -68,6 +68,7 @@
                                                 <span class="input-group-text"><i class="fas fa-calendar"></i></span>
                                                 </div>
                                                 <x-datePicker wire:model.defer="state.date" id="appointmentDate" :error="'date'"/>
+                                                
                                                 @error('date')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}

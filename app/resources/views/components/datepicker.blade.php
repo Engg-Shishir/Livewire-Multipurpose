@@ -12,5 +12,6 @@ onchange="this.dispatchEvent(new InputEvent('input'))"
             $('#{{ $id }}').datetimepicker({
                 format:'L',
             });
-    </script>    
+    </script>   
+     
 @endpush

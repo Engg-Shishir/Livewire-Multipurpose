@@ -31,6 +31,7 @@
 
   <!-- Bootstrap Color Picker -->
   <link rel="stylesheet" href="{{ asset('backend/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css') }}">
+
   
 
   @livewireStyles
@@ -116,6 +117,8 @@
 {{-- Html ZEditor Form --}}
 <script src="https://cdn.ckeditor.com/ckeditor5/29.2.0/classic/ckeditor.js"></script>
 
+
+
 {{-- Sweet Alert Js --}}
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -134,16 +137,11 @@
       "progressBar": true,
     }
   });
-
-  
-  window.addEventListener('successAlert', event =>{
-    toastr.success(event.detail.message, 'Success!');
-  });
 </script>
 
 
 
-@stack('js')
 @livewireScripts
+@stack('js')
 </body>
 </html>

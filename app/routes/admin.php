@@ -14,5 +14,4 @@ Route::get('user', ListUsers::class)->name('user');
 Route::get('appoinments', ListAppoinments::class)->name('appoinments');
 Route::get('appoinments/create', CreateAppoinmentForm::class)->name('appoinments.create');
 Route::get('appoinment/{PassAppoinment}/edit', UpdateAppoinmentForm::class)->name('appoinments.edit');
-
 Route::get('profile', Update::class)->name('profile.edit');

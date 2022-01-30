@@ -89,10 +89,11 @@
                                                 <span class="input-group-text"><i class="fas fa-calendar"></i></span>
                                                 </div>
                                                 <x-datePicker wire:model.defer="state.date" id="appointmentDate" :error="'date'"/>
+                                                
                                                 @error('date')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
                                                 @enderror
                                             </div>                                            
                                         </div>
@@ -105,7 +106,9 @@
                                                 <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fas fa-clock"></i></span>
                                                 </div>
+
                                                 <x-timePicker wire:model.defer="state.time" id="appointmentTime" :error="'time'"/>
+
                                                 @error('time')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}

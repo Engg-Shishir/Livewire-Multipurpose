@@ -32,6 +32,8 @@ class ListAppoinments extends AdminComponent
 			$this->reset(['selectedRows', 'selectPageRows']);
 		}
 	}
+
+
    /* This is Livewire default get Attribute hook */
 	public function getAppointmentsProperty()
 	{
@@ -105,7 +107,7 @@ class ListAppoinments extends AdminComponent
 
     public function render()
     {
-        $appoinments = $this->appointments;//Here $this->appointments indicate getAppointmentsProperty().
+        $appoinments = $this->appointments;//Here $this->appointments indicate getAppointmentsProperty() livewire hook.
 
         $appoinmentsCount = Appoinment::count();
         $scheduledAppoinmentsCount = Appoinment::where('status','scheduled')->count();

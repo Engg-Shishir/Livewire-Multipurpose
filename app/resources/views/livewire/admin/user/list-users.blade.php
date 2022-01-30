@@ -242,9 +242,17 @@
             toastr.success(event.detail.message, 'Success!');
     });
 
+
+    window.addEventListener('ok', event =>{
+        toastr.success(event.detail.message, 'Success!');
+        
+    });
+
+  
     window.addEventListener('successAlert', event =>{
         toastr.success(event.detail.message, 'Success!');
     });
+
 </script>
 
 
