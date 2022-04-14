@@ -3,7 +3,7 @@
 namespace App\Http\Livewire\Admin\Dashboard;
 
 use Livewire\Component;
-use App\Models\Appoinment;
+use App\Models\Appointment;
 
 class AppoinmentsCount extends Component
 {
@@ -16,7 +16,7 @@ class AppoinmentsCount extends Component
 
     public function getAppointmentsCount($status = null)
     {
-        $this->appointmentsCount = Appoinment::query()
+        $this->appointmentsCount = Appointment::query()
             ->when($status, function ($query, $status) {
                 return $query->where('status', $status);
             })

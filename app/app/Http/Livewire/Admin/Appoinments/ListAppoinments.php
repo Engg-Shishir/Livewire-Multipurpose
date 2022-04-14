@@ -3,7 +3,7 @@
 namespace App\Http\Livewire\Admin\Appoinments;
 
 use App\Http\Livewire\Admin\AdminComponent;
-use App\Models\Appoinment;
+use App\Models\Appointment;
 
 class ListAppoinments extends AdminComponent
 {
@@ -37,7 +37,7 @@ class ListAppoinments extends AdminComponent
    /* This is Livewire default get Attribute hook */
 	public function getAppointmentsProperty()
 	{
-        return Appoinment::with('client') 
+        return Appointment::with('client') 
         ->when($this->status, function($query,$status){
             return $query->where('status', $status);
         })
@@ -47,7 +47,7 @@ class ListAppoinments extends AdminComponent
 
     public function deleteSelectedRows()
 	{
-		Appoinment::whereIn('id', $this->selectedRows)->delete();
+		Appointment::whereIn('id', $this->selectedRows)->delete();
 
 		$this->dispatchBrowserEvent('SuccessAlert', ['message' => 'All selected appointment got deleted.']);
 
@@ -55,7 +55,7 @@ class ListAppoinments extends AdminComponent
 	}
     public function markAllAsScheduled()
 	{
-		Appoinment::whereIn('id', $this->selectedRows)->update(['status' => 'SCHEDULED']);
+		Appointment::whereIn('id', $this->selectedRows)->update(['status' => 'SCHEDULED']);
 
 		$this->dispatchBrowserEvent('SuccessAlert', ['message' => 'Appointments marked as scheduled']);
 
@@ -64,7 +64,7 @@ class ListAppoinments extends AdminComponent
 
 	public function markAllAsClosed()
 	{
-		Appoinment::whereIn('id', $this->selectedRows)->update(['status' => 'CLOSED']);
+		Appointment::whereIn('id', $this->selectedRows)->update(['status' => 'CLOSED']);
 
 		$this->dispatchBrowserEvent('alertSuccess', ['message' => 'Appointments marked as closed.']);
 
@@ -93,7 +93,7 @@ class ListAppoinments extends AdminComponent
     public function appoinmentDelete()
     {
         # code...
-        $user = Appoinment::findOrFail($this->appoinmentIdRemoval);
+        $user = Appointment::findOrFail($this->appoinmentIdRemoval);
         $user->delete();
         $this->dispatchBrowserEvent('alertSuccess',['message'=>'Appoinment Deleted successfully']);
     }
@@ -109,9 +109,9 @@ class ListAppoinments extends AdminComponent
     {
         $appoinments = $this->appointments;//Here $this->appointments indicate getAppointmentsProperty() livewire hook.
 
-        $appoinmentsCount = Appoinment::count();
-        $scheduledAppoinmentsCount = Appoinment::where('status','scheduled')->count();
-        $closedAppoinmentsCount = Appoinment::where('status','closed')->count();
+        $appoinmentsCount = Appointment::count();
+        $scheduledAppoinmentsCount = Appointment::where('status','scheduled')->count();
+        $closedAppoinmentsCount = Appointment::where('status','closed')->count();
 
 
         return view('livewire.admin.appoinments.list-appoinments',[
