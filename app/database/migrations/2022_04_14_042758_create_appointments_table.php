@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAppoinmentsTable extends Migration
+class CreateAppointmentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateAppoinmentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('appoinments', function (Blueprint $table) {
+        Schema::create('appointments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('client_id')->contrained();
             /* $table->unsignedBigInteger('client_id'); */
@@ -21,9 +21,9 @@ class CreateAppoinmentsTable extends Migration
             $table->time('time');
             $table->string('status');
             $table->text('note')->nullable();
+            $table->text('members')->nullable()->default(null);
+            $table->string('color')->nullable()->default(null);
             $table->timestamps();
-
-            /* $table->forign('client_id')->references('id')->on('clients'); */
         });
     }
 
@@ -34,6 +34,6 @@ class CreateAppoinmentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('appoinments');
+        Schema::dropIfExists('appointments');
     }
 }
